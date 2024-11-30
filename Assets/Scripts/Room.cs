@@ -6,6 +6,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [ExecuteInEditMode]
+[System.Serializable]
 public class Room : MonoBehaviour
 {
 
@@ -18,7 +19,7 @@ public class Room : MonoBehaviour
    // private List<Room> connected_rooms;
     private List<LineRenderer> line_renderers;
 
-    public List<RoomConnection> paths;
+    [SerializeField] public List<RoomConnection> paths;
 
     public int rooms_count;
 
@@ -30,16 +31,20 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
-        rooms_count = 0;
-        canvas = GetComponentInParent<Canvas>();
-        prev_room_count = 0;
-
-        if (!started)
+        if (!Application.isPlaying)
         {
-            started = true;
-            rooms = new List<Room>();
-            //connected_rooms = new List<Room>();
-            line_renderers = new List<LineRenderer>();
+            print("Start ROOOOOM");
+            rooms_count = 0;
+            canvas = GetComponentInParent<Canvas>();
+            prev_room_count = 0;
+
+            if (!started)
+            {
+                started = true;
+                if (rooms == null) rooms = new List<Room>();
+                //connected_rooms = new List<Room>();
+                if (line_renderers == null) line_renderers = new List<LineRenderer>();
+            }
         }
     }
 
@@ -50,6 +55,7 @@ public class Room : MonoBehaviour
         while (rooms_count > prev_room_count)
         {
             prev_room_count++;
+            canvas = GetComponentInParent<Canvas>();
             var room = Instantiate(room_prefab, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
             rooms.Add( room);
             room.Start();
@@ -130,19 +136,22 @@ public class Room : MonoBehaviour
         }
 
         // Generate a random value between 0 and the total weight
-        float randomValue = Random.Range(0f, totalWeight);
+        float randomValue = Random.Range(0f, 1);
 
         // Find the selected path based on the random value
         for (int i = 0; i < paths.Count; i++)
         {
             if (randomValue <= cumulativeWeights[i])
             {
-                return paths[i].roomB;
+                if (paths[i].roomA == this) { return paths[i].roomB; }
+                if (paths[i].roomB == this) { return paths[i].roomA; }
             }
         }
 
         // Fallback (shouldn't reach here if weights are correctly calculated)
-        return null;
+        int j = 0;
+        if (paths[j].roomA == this) { return paths[j].roomB; }
+        return paths[j].roomA; 
 
     }
 
