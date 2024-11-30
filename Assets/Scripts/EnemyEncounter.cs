@@ -13,7 +13,8 @@ public class EnemyEncounter : MonoBehaviour
     }
     public Type enemyType;
     public int enemyCount;
-
+    [SerializeField]
+    private Player player;
     class Enemy
     {
         public int amount;
@@ -54,30 +55,26 @@ public class EnemyEncounter : MonoBehaviour
 
     void Start()
     {
-        fight = new Enemy(enemyCount, enemyType);
+    
     }
 
     bool CheckForDeaths()
     {
-        //if enemy or player are dead 
-        if(fight.amount <= 0 /*|| player.hp < 0*/ )
+        if(fight.amount <= 0 || player.hp <= 0 )
         {
             return true;
         }
         else return false;
     }
 
-    void Turn(
-        //Player player
-              )
+    void Turn(Player player)
     {
         string plural = "s";
         string deaths = ".";
         int enemyDamage = fight.amount * fight.attack;
-        int playerDamage = 20;
+        int playerDamage = player.attack;
         int kills = 0;
-        //playerDamage = player.attack;
-        //player.hp -= enemyDamage
+        player.hp -= enemyDamage;
         if(fight.amount == 1)
         {
             plural = "";
@@ -113,15 +110,22 @@ public class EnemyEncounter : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void Update()
+    public void InitiateFight()
     {
-        while(fighting)
+        fight = new Enemy(enemyCount, enemyType);
+        fighting = true;
+        while (fighting)
         {
             turn++;
             Debug.Log("Turn " + turn + " begins:");
-            Turn();
+            Turn(player);
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
         
     }
 }
