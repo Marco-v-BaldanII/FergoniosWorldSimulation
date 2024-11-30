@@ -12,7 +12,13 @@ public class Room : MonoBehaviour
 
     public RoomConnection connection_prefab;
 
+    public EnemyEncounter encounter;
+
+    public bool fight;
+
     public Room room_prefab;
+
+    public bool bonfire;
 
     private List<Room> rooms;
 

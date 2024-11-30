@@ -13,7 +13,8 @@ public class EnemyEncounter : MonoBehaviour
     }
     public Type enemyType;
     public int enemyCount;
-
+    [SerializeField]
+    private Player player;
     class Enemy
     {
         public int amount;
@@ -40,8 +41,8 @@ public class EnemyEncounter : MonoBehaviour
                     attack = 5;
                     break;
                 case Type.BOSS:
-                    hp = 100;
-                    currentHP = 100;
+                    hp = 180;
+                    currentHP = 180;
                     name = "Dark Knight";
                     attack = 20;
                     break;
@@ -54,30 +55,26 @@ public class EnemyEncounter : MonoBehaviour
 
     void Start()
     {
-        fight = new Enemy(enemyCount, enemyType);
+    
     }
 
     bool CheckForDeaths()
     {
-        //if enemy or player are dead 
-        if(fight.amount <= 0 /*|| player.hp < 0*/ )
+        if(fight.amount <= 0 || player.hp <= 0 )
         {
             return true;
         }
         else return false;
     }
 
-    void Turn(
-        //Player player
-              )
+    void Turn(Player player)
     {
         string plural = "s";
         string deaths = ".";
         int enemyDamage = fight.amount * fight.attack;
-        int playerDamage = 20;
+        int playerDamage = player.attack;
         int kills = 0;
-        //playerDamage = player.attack;
-        //player.hp -= enemyDamage
+        player.hp -= enemyDamage;
         if(fight.amount == 1)
         {
             plural = "";
@@ -99,7 +96,7 @@ public class EnemyEncounter : MonoBehaviour
                 kills++;
                 if(CheckForDeaths())
                 {
-                    Debug.Log("Player dealt " + (playerDamage - i) + " damage to the " + fight.name + plural + ", killing" + kills + " of them and winning the fight.");
+                    Debug.Log("Player dealt " + (playerDamage - i + 1) + " damage to the " + fight.name + plural + ", killing " + kills + " of them and winning the fight.");
                     fighting = false;
                     return;
                 }
@@ -109,19 +106,27 @@ public class EnemyEncounter : MonoBehaviour
         {
             deaths = (" and killed " + kills + " of them.");
         }
-        Debug.Log("Player dealt " + playerDamage + "to the" + fight.name + plural + deaths);
+        Debug.Log("Player dealt " + playerDamage + " damage to the " + fight.name + plural + deaths);
     }
 
+
+    public void InitiateFight()
+    {
+        fight = new Enemy(enemyCount, enemyType);
+        fighting = true;
+        while (fighting)
+        {
+            turn++;
+            Debug.Log("Turn " + turn + " begins:");
+            Turn(player);
+        }
+        Debug.Log("Current Player HP = " + player.hp);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        while(fighting)
-        {
-            turn++;
-            Debug.Log("Turn " + turn + " begins:");
-            Turn();
-        }
+        
         
     }
 }
