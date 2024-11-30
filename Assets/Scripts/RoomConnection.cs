@@ -59,3 +59,9 @@ public class RoomConnection : MonoBehaviour
 
     }
 }
+
+struct Weight
+{
+    int min;
+    int max;
+}

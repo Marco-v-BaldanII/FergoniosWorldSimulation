@@ -12,43 +12,51 @@ public class Player : MonoBehaviour
     public int maxhp = 200;
     public int hp;
     public int attack = 20;
+    bool canMove;
 
     void Die()
     {
+        canMove = false;
         current_room = spawn_room;
         hp = maxhp;
         Debug.Log("Player respawed");
+        canMove = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine("Simulation");
+        StartCoroutine("Simulation");
         hp = maxhp;
     }
 
     void CheckFight()
     {
+        canMove = false;
         if (current_room.encounter != null && current_room.fight)
         {
             current_room.encounter.InitiateFight();
             current_room.fight = false;
         }
+        canMove = true;
     }
 
     void CheckBonfire()
     {
+        canMove = false;
         if(current_room.bonfire)
         {
             spawn_room = current_room;
             hp = maxhp;
             Debug.Log("Player rested at a bonfire and recovered HP");
         }
+        canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (hp < 0)
         {
             Die();
