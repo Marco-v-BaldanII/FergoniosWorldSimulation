@@ -76,8 +76,8 @@ public class Player : MonoBehaviour
                     text = " health being restored by 50%.";
                     break;
             }
+            Debug.Log("Player found a treasure which resulted in" + text);
         }
-        Debug.Log("Player found a treasure which resulted in" + text);
         current_room.hasTreasure = false;
     }
 
@@ -104,6 +104,8 @@ public class Player : MonoBehaviour
             current_room = current_room.GetNextRoom();
 
             transform.position = current_room.transform.position;
+
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
 
             yield return new WaitForSecondsRealtime(step_time);
 

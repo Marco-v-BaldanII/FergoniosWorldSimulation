@@ -4,9 +4,9 @@ using System.Drawing;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 [ExecuteInEditMode]
-[System.Serializable]
 public class Room : MonoBehaviour
 {
 
@@ -69,6 +69,13 @@ public class Room : MonoBehaviour
             prev_room_count++;
             canvas = GetComponentInParent<Canvas>();
             var room = Instantiate(room_prefab, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+
+            foreach (Transform child in room.transform)
+            {
+                DestroyImmediate(child.gameObject);
+            }
+
+            room.paths.Clear();
             rooms.Add( room);
             room.Start();
             //2 way connection
@@ -78,9 +85,11 @@ public class Room : MonoBehaviour
 
             // Both connections share the same weight display
             var text_component = Instantiate(weightPref, this.transform);
+            var we = text_component.GetComponent<WeightIcon>();
 
-            room.AddConnection(this, weight, text_component);
-            this.AddConnection( room, weight, text_component );
+            we.connection1 = room.AddConnection(this, weight, text_component);
+            we.connection2 = this.AddConnection(room, weight, text_component);
+
         }
         
 
@@ -114,7 +123,7 @@ public class Room : MonoBehaviour
     }
 
 
-    public void AddConnection(Room connected_room, int weight, GameObject weightPref)
+    RoomConnection  AddConnection(Room connected_room, int weight, GameObject weightP)
     {
         //GameObject connection = new GameObject("connection");
         //connection.transform.parent = this.transform;
@@ -132,9 +141,11 @@ public class Room : MonoBehaviour
 
 
         var newConnection = GameObject.Instantiate(connection_prefab, canvas.transform);
-        newConnection.Initialize(this, connected_room, weight, weightPref);
+        newConnection.Initialize(this, connected_room, weight, weightP);
         //connection.transform.parent = this.transform;
         paths.Add(newConnection);
+
+        return newConnection;
 
     }
 
@@ -142,30 +153,44 @@ public class Room : MonoBehaviour
     {
         // Create a list to store cumulative weights
         List<float> cumulativeWeights = new List<float>();
-        float totalWeight = 0f;
+        int totalWeight = 0;
 
-        // Calculate cumulative weights
-        foreach (RoomConnection path in paths)
+        for(int i = 0; i < paths.Count; ++i)
         {
-            totalWeight += 1f / path.weight; // Invert weight so lower weight is more favorable
-            cumulativeWeights.Add(totalWeight);
+            if (i != 0) { paths[i].weight.min = paths[i - 1].weight.max +1; }
+
+            totalWeight += paths[i].weight.max;
+
+
         }
 
-        // Generate a random value between 0 and the total weight
-        float randomValue = Random.Range(0f, 1);
+        int randID = Random.Range(0, totalWeight);
 
-        // Find the selected path based on the random value
-        for (int i = 0; i < paths.Count; i++)
+        for (int i = 0; i < paths.Count; ++i)
         {
-            if (randomValue <= cumulativeWeights[i])
-            {
+            int prev_max = 0;
+            if(i != 0) { prev_max = paths[i].weight.max; }
+
+            if (randID >= paths[i].weight.min && randID <= paths[i].weight.max + prev_max) {
+
+                int new_weight =  int.Parse(paths[i].weightIcon.label.text) - 2;
+                new_weight = Mathf.Clamp(new_weight, 2, 9);
+
+                paths[i].weightIcon.label.text = new_weight.ToString();
+               // print("changing weight to " + paths[i].weightIcon.my_weight.max);
+
                 if (paths[i].roomA == this) { return paths[i].roomB; }
-                if (paths[i].roomB == this) { return paths[i].roomA; }
+                return paths[i].roomA;
             }
+
         }
 
-        // Fallback (shouldn't reach here if weights are correctly calculated)
+        print("Should not come here it's ILLLLEEEEGAAAALLL");
+
+            // Fallback (shouldn't reach here if weights are correctly calculated)
         int j = 0;
+        //paths[j].weight.max -= 5;
+        //paths[j].weightIcon.my_weight.max -= 5;
         if (paths[j].roomA == this) { return paths[j].roomB; }
         return paths[j].roomA; 
 
