@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public Room current_room;
+    public Room spawn_room;
     public float step_time = 0.4f;
 
     public int maxhp = 200;
@@ -14,7 +15,9 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-
+        current_room = spawn_room;
+        hp = maxhp;
+        Debug.Log("Player respawed");
     }
 
     // Start is called before the first frame update
@@ -25,9 +28,19 @@ public class Player : MonoBehaviour
 
     void CheckFight()
     {
-        if (true /*current_room.hasFight*/)
+        if (current_room.encounter != null)
         {
-            //current_room.encounter.initiateFight();
+            current_room.encounter.InitiateFight();
+        }
+    }
+
+    void CheckBonfire()
+    {
+        if(current_room.bonfire)
+        {
+            spawn_room = current_room;
+            hp = maxhp;
+            Debug.Log("Player rested at a bonfire and recovered HP");
         }
     }
 
@@ -39,6 +52,7 @@ public class Player : MonoBehaviour
             Die();
         }
         CheckFight();
+        CheckBonfire();
     }
 
 
