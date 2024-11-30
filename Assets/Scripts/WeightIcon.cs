@@ -29,7 +29,7 @@ public class WeightIcon : MonoBehaviour
         if(label == null) { label = GetComponent<TextMeshProUGUI>(); }
         if( int.Parse(label.text ) != my_weight.max)
         {
-            print("changed weight to " + label.text);
+            //print("changed weight to " + label.text);
             my_weight.max = int.Parse(label.text);
         }
 
@@ -49,7 +49,7 @@ public class WeightIcon : MonoBehaviour
         while (true)
         {
             yield return new WaitForSecondsRealtime(0.4f);
-            if(label != null) { label.text = (int.Parse(label.text) + 1).ToString(); }
+            if(label != null && Application.isPlaying) { label.text = (int.Parse(label.text) + 1).ToString(); }
         }
     }
 }

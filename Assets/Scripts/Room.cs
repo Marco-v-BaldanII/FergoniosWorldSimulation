@@ -173,7 +173,7 @@ public class Room : MonoBehaviour
 
             if (randID >= paths[i].weight.min && randID <= paths[i].weight.max + prev_max) {
 
-                int new_weight =  int.Parse(paths[i].weightIcon.label.text) - 2;
+                int new_weight =  int.Parse(paths[i].weightIcon.label.text) - 8;
                 new_weight = Mathf.Clamp(new_weight, 2, 9);
 
                 paths[i].weightIcon.label.text = new_weight.ToString();
