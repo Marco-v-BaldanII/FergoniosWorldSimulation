@@ -41,8 +41,8 @@ public class EnemyEncounter : MonoBehaviour
                     attack = 5;
                     break;
                 case Type.BOSS:
-                    hp = 100;
-                    currentHP = 100;
+                    hp = 180;
+                    currentHP = 180;
                     name = "Dark Knight";
                     attack = 20;
                     break;
@@ -96,7 +96,7 @@ public class EnemyEncounter : MonoBehaviour
                 kills++;
                 if(CheckForDeaths())
                 {
-                    Debug.Log("Player dealt " + (playerDamage - i) + " damage to the " + fight.name + plural + ", killing" + kills + " of them and winning the fight.");
+                    Debug.Log("Player dealt " + (playerDamage - i + 1) + " damage to the " + fight.name + plural + ", killing " + kills + " of them and winning the fight.");
                     fighting = false;
                     return;
                 }
@@ -106,7 +106,7 @@ public class EnemyEncounter : MonoBehaviour
         {
             deaths = (" and killed " + kills + " of them.");
         }
-        Debug.Log("Player dealt " + playerDamage + "to the" + fight.name + plural + deaths);
+        Debug.Log("Player dealt " + playerDamage + " damage to the " + fight.name + plural + deaths);
     }
 
 
@@ -120,6 +120,7 @@ public class EnemyEncounter : MonoBehaviour
             Debug.Log("Turn " + turn + " begins:");
             Turn(player);
         }
+        Debug.Log("Current Player HP = " + player.hp);
     }
 
     // Update is called once per frame

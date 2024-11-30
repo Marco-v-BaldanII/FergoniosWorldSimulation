@@ -13,6 +13,8 @@ public class Room : MonoBehaviour
 
     public EnemyEncounter encounter;
 
+    public bool fight;
+
     public Room room_prefab;
 
     public bool bonfire;

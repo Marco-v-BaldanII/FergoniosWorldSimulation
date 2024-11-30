@@ -23,14 +23,16 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("Simulation");
+        //StartCoroutine("Simulation");
+        hp = maxhp;
     }
 
     void CheckFight()
     {
-        if (current_room.encounter != null)
+        if (current_room.encounter != null && current_room.fight)
         {
             current_room.encounter.InitiateFight();
+            current_room.fight = false;
         }
     }
 
@@ -47,7 +49,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hp > 0)
+        if (hp < 0)
         {
             Die();
         }
