@@ -24,7 +24,7 @@ public class RoomConnection : MonoBehaviour
 
     //public RoomConnection(Room rA, Room rB) { Initialize(rA, rB); }
 
-    public void Initialize(Room rA, Room rb, int weight)
+    public void Initialize(Room rA, Room rb, int weight, GameObject text_component)
     {
         roomA = rA; roomB = rb;
         lineRenderer = GetComponent<LineRenderer>();
@@ -32,7 +32,7 @@ public class RoomConnection : MonoBehaviour
         lineRenderer.SetPositions(new Vector3[] { rA.transform.position, rb.transform.position });
         this.weight = weight;
 
-        text_component = Instantiate(weightPref, this.transform);
+        this.text_component = text_component;
         label = text_component.GetComponent<TextMeshProUGUI>();
         label.text = weight.ToString();
 

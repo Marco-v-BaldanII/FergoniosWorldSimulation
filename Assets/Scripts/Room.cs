@@ -12,6 +12,8 @@ public class Room : MonoBehaviour
 
     public RoomConnection connection_prefab;
 
+    public GameObject weightPref;
+
     public EnemyEncounter encounter;
 
     public bool fight;
@@ -69,8 +71,12 @@ public class Room : MonoBehaviour
 
             int weight = Random.Range(0, 9);
 
-            room.AddConnection(this, weight);
-            this.AddConnection( room, weight );
+
+            // Both connections share the same weight display
+            var text_component = Instantiate(weightPref, this.transform);
+
+            room.AddConnection(this, weight, text_component);
+            this.AddConnection( room, weight, text_component );
         }
         
 
@@ -104,7 +110,7 @@ public class Room : MonoBehaviour
     }
 
 
-    public void AddConnection(Room connected_room, int weight)
+    public void AddConnection(Room connected_room, int weight, GameObject weightPref)
     {
         //GameObject connection = new GameObject("connection");
         //connection.transform.parent = this.transform;
@@ -122,7 +128,7 @@ public class Room : MonoBehaviour
 
 
         var newConnection = GameObject.Instantiate(connection_prefab, canvas.transform);
-        newConnection.Initialize(this, connected_room, weight);
+        newConnection.Initialize(this, connected_room, weight, weightPref);
         //connection.transform.parent = this.transform;
         paths.Add(newConnection);
 
