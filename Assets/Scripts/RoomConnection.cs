@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,24 +9,32 @@ using UnityEngine.UI;
 public class RoomConnection : MonoBehaviour
 {
 
-    Room roomA;
-    Room roomB;
+    public Room roomA;
+    public Room roomB;
 
     LineRenderer lineRenderer;
 
-    public Text label;
+    public TextMeshProUGUI label;
+    private GameObject text_component;
+
+    public GameObject weightPref;
 
     [Range(0, 9)]
     public int weight;
 
-    public RoomConnection(Room rA, Room rB) { Initialize(rA, rB); }
+    //public RoomConnection(Room rA, Room rB) { Initialize(rA, rB); }
 
-    public void Initialize(Room rA, Room rb)
+    public void Initialize(Room rA, Room rb, int weight)
     {
         roomA = rA; roomB = rb;
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
 
         lineRenderer.SetPositions(new Vector3[] { rA.transform.position, rb.transform.position });
+        this.weight = weight;
+
+        text_component = Instantiate(weightPref, this.transform);
+        label = text_component.GetComponent<TextMeshProUGUI>();
+        label.text = weight.ToString();
 
     }
 
@@ -33,7 +42,7 @@ public class RoomConnection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        label = GetComponent<TextMeshProUGUI>();   
     }
 
     // Update is called once per frame
@@ -41,5 +50,12 @@ public class RoomConnection : MonoBehaviour
     {
         lineRenderer?.SetPosition(1, roomA.transform.position);
         lineRenderer?.SetPosition(0, roomB.transform.position);
+
+        if (text_component)
+        {
+            var distance = roomA.transform.position + roomB.transform.position;
+            text_component.transform.position = distance * 0.5f;
+        }
+
     }
 }

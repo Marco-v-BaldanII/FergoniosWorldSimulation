@@ -26,10 +26,12 @@ public class Room : MonoBehaviour
 
     bool started = false;
 
+    private Canvas canvas;
+
     private void Start()
     {
         rooms_count = 0;
-
+        canvas = GetComponentInParent<Canvas>();
         prev_room_count = 0;
 
         if (!started)
@@ -48,12 +50,15 @@ public class Room : MonoBehaviour
         while (rooms_count > prev_room_count)
         {
             prev_room_count++;
-            var room = Instantiate(room_prefab, new Vector3(0, 0, 0), Quaternion.identity);
+            var room = Instantiate(room_prefab, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
             rooms.Add( room);
             room.Start();
             //2 way connection
-            room.AddConnection(this);
-            this.AddConnection( room );
+
+            int weight = Random.Range(0, 9);
+
+            room.AddConnection(this, weight);
+            this.AddConnection( room, weight );
         }
         
 
@@ -87,7 +92,7 @@ public class Room : MonoBehaviour
     }
 
 
-    public void AddConnection(Room connected_room)
+    public void AddConnection(Room connected_room, int weight)
     {
         //GameObject connection = new GameObject("connection");
         //connection.transform.parent = this.transform;
@@ -104,10 +109,40 @@ public class Room : MonoBehaviour
         //print("Added " + connected_room.name);
 
 
-        var newConnection = GameObject.Instantiate(connection_prefab);
-        newConnection.Initialize(this, connected_room);
+        var newConnection = GameObject.Instantiate(connection_prefab, canvas.transform);
+        newConnection.Initialize(this, connected_room, weight);
         //connection.transform.parent = this.transform;
         paths.Add(newConnection);
+
+    }
+
+    public Room GetNextRoom()
+    {
+        // Create a list to store cumulative weights
+        List<float> cumulativeWeights = new List<float>();
+        float totalWeight = 0f;
+
+        // Calculate cumulative weights
+        foreach (RoomConnection path in paths)
+        {
+            totalWeight += 1f / path.weight; // Invert weight so lower weight is more favorable
+            cumulativeWeights.Add(totalWeight);
+        }
+
+        // Generate a random value between 0 and the total weight
+        float randomValue = Random.Range(0f, totalWeight);
+
+        // Find the selected path based on the random value
+        for (int i = 0; i < paths.Count; i++)
+        {
+            if (randomValue <= cumulativeWeights[i])
+            {
+                return paths[i].roomB;
+            }
+        }
+
+        // Fallback (shouldn't reach here if weights are correctly calculated)
+        return null;
 
     }
 
