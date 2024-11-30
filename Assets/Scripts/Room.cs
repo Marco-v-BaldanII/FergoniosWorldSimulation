@@ -18,6 +18,10 @@ public class Room : MonoBehaviour
 
     public bool fight;
 
+    public Treasure treasure;
+
+    public bool hasTreasure;
+
     public Room room_prefab;
 
     public bool bonfire;
