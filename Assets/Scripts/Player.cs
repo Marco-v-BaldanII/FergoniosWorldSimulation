@@ -32,37 +32,67 @@ public class Player : MonoBehaviour
 
     void CheckFight()
     {
-        canMove = false;
         if (current_room.encounter != null && current_room.fight)
         {
             current_room.encounter.InitiateFight();
             current_room.fight = false;
         }
-        canMove = true;
     }
 
     void CheckBonfire()
     {
-        canMove = false;
         if(current_room.bonfire)
         {
             spawn_room = current_room;
             hp = maxhp;
             Debug.Log("Player rested at a bonfire and recovered HP");
         }
-        canMove = true;
+    }
+
+    void CheckTreasure()
+    {
+        string text = " NOTHING LMAO";
+        if(current_room.treasure && current_room.hasTreasure)
+        {
+            switch(current_room.treasure.treasureType)
+            {
+                case Treasure.Type.ATK:
+                    attack += 5;
+                    text = " attack being increased by 5.";
+                    break;
+                case Treasure.Type.HP:
+                    maxhp += 20;
+                    hp += 20;
+                    text = " max HP being increased by 20.";
+
+                    break;
+                case Treasure.Type.HEAL:
+                    hp += maxhp / 2;
+                    if (hp>maxhp)
+                    {
+                        hp=maxhp;
+
+                    }
+                    text = " health being restored by 50%.";
+                    break;
+            }
+        }
+        Debug.Log("Player found a treasure which resulted in" + text);
+        current_room.hasTreasure = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        canMove = false;
         if (hp < 0)
         {
             Die();
         }
         CheckFight();
         CheckBonfire();
+        CheckTreasure();
+        canMove = true;
     }
 
 
