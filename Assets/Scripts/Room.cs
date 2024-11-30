@@ -20,6 +20,23 @@ public class Room : MonoBehaviour
 
     public int prev_room_count;
 
+    bool started = false;
+
+    private void Start()
+    {
+        rooms_count = 0;
+
+        prev_room_count = 0;
+
+        if (!started)
+        {
+            started = true;
+            rooms = new List<Room>();
+            connected_rooms = new List<Room>();
+            line_renderers = new List<LineRenderer>();
+        }
+    }
+
     private void Update()
     {
         //print(rooms.Count + " rooms count");
@@ -27,8 +44,9 @@ public class Room : MonoBehaviour
         while (rooms_count > prev_room_count)
         {
             prev_room_count++;
-            var room = Instantiate(room_prefab, new Vector3(0, 0, 0), Quaternion.identity, this.transform);
+            var room = Instantiate(room_prefab, new Vector3(0, 0, 0), Quaternion.identity);
             rooms.Add( room);
+            room.Start();
             room.AddConnection(this);
         }
         
@@ -54,8 +72,10 @@ public class Room : MonoBehaviour
 
         for(int i = 0; i < connected_rooms.Count; i++) {
 
+
             line_renderers[i]?.SetPosition(1, connected_rooms[i].transform.position);
-        
+            line_renderers[i]?.SetPosition(0, transform.position);
+
         }
 
     }
@@ -63,14 +83,19 @@ public class Room : MonoBehaviour
 
     public void AddConnection(Room connected_room)
     {
-        var line_renderer = this.AddComponent<LineRenderer>();
-        line_renderer.positionCount++;
+        GameObject connection = new GameObject("connection");
+        connection.transform.parent = this.transform;
+
+        var line_renderer = connection.AddComponent<LineRenderer>();
+
         line_renderer.SetPosition(0, this.transform.position);
-        line_renderer.positionCount++;
+
         line_renderer.SetPosition(1, connected_room.transform.position);
+
 
         line_renderers.Add(line_renderer);
         connected_rooms.Add(connected_room);
+        print("Added " + connected_room.name);
 
     }
 
