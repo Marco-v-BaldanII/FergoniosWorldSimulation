@@ -97,7 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6106146c867e0468cd6755a9721933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connection_prefab: {fileID: 3158519694981977980, guid: 81be954730e3b8746a8ead3a2ed00049, type: 3}
   room_prefab: {fileID: 8067410307417023114}
-  lineRenderer: {fileID: 0}
+  paths: []
   rooms_count: 0
   prev_room_count: 0
