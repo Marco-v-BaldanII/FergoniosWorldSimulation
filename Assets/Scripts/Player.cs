@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public Room current_room;
     public Room spawn_room;
     public float step_time = 0.4f;
-
+    int xp = 0;
     public int maxhp = 200;
     public int hp;
     public int attack = 20;
@@ -30,11 +30,35 @@ public class Player : MonoBehaviour
         hp = maxhp;
     }
 
+    void LevelUp()
+    {
+        while(xp > 100)
+        {
+            xp -= 100;
+            attack++;
+            maxhp += 5;
+            hp += 5;
+            Debug.Log("Leveled up! Attack +1, HP +5");
+        }
+    }
+
     void CheckFight()
     {
         if (current_room.encounter != null && current_room.fight)
         {
             current_room.encounter.InitiateFight();
+            if (hp < 0)
+            {
+                Die();
+                return;
+            }
+            else
+            {
+                int _xp = (current_room.encounter.enemyCount * ((int)current_room.encounter.enemyType + 1));
+                xp += _xp;
+                Debug.Log("Obtained " + _xp + " XP.");
+                LevelUp();
+            }
             current_room.fight = false;
         }
     }
@@ -85,10 +109,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         canMove = false;
-        if (hp < 0)
-        {
-            Die();
-        }
         CheckFight();
         CheckBonfire();
         CheckTreasure();
