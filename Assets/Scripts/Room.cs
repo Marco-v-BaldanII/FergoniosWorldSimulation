@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
+using UnityEngine.SceneManagement;
 
 [ExecuteInEditMode]
 public class Room : MonoBehaviour
@@ -27,6 +28,8 @@ public class Room : MonoBehaviour
     public Room room_prefab;
 
     public bool bonfire;
+
+    public bool is_boss;
 
     private List<Room> rooms;
 
@@ -171,13 +174,13 @@ public class Room : MonoBehaviour
         }
 
         int randID = Random.Range(0, totalWeight);
-
+        int prev_max = 0;
         for (int i = 0; i < paths.Count; ++i)
         {
             if (paths[i].needs_key && !has_key) continue;
 
-            int prev_max = 0;
-            if(i != 0) { prev_max = paths[i].weight.max; }
+
+            if(i != 0) { prev_max += paths[i].weight.max; }
 
             if (randID >= paths[i].weight.min && randID <= paths[i].weight.max + prev_max) {
 
@@ -191,6 +194,24 @@ public class Room : MonoBehaviour
                 return paths[i].roomA;
             }
 
+        }
+
+        // ARRIVED TO BOSS
+        if (is_boss)
+        {
+
+            SimulationManager.Instance.num_simulations--;
+
+            if (SimulationManager.Instance.num_simulations > 0)
+            {
+                SceneManager.LoadScene(0);
+                return this;
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+                return this;
+            }
         }
 
         //print("Should not come here it's ILLLLEEEEGAAAALLL");

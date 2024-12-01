@@ -1,0 +1,14 @@
+Turn,PlayerHP,EnemiesRemaining,EnemyCurrentHP,Event
+1,140,6,20,Player took 60 damage
+1,140,5,20,Enemy killed
+1,140,5,20,Player dealt 20 damage
+2,90,5,20,Player took 50 damage
+2,90,4,20,Enemy killed
+2,90,4,20,Player dealt 20 damage
+3,50,4,20,Player took 40 damage
+3,50,3,20,Enemy killed
+3,50,3,20,Player dealt 20 damage
+4,20,3,20,Player took 30 damage
+4,20,2,20,Enemy killed
+4,20,2,20,Player dealt 20 damage
+5,0,2,20,Player took 20 damage

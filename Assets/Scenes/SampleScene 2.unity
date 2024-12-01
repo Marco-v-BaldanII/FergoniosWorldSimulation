@@ -293,7 +293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -254431550467665048, guid: 4cbe641eeece9e64ea3bdd09be588c15, type: 3}
       propertyPath: enemyCount
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 410055873816613269, guid: 4cbe641eeece9e64ea3bdd09be588c15, type: 3}
       propertyPath: m_RootOrder
@@ -1062,6 +1062,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 131219332}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 440416223}
   rooms_count: 0
@@ -1160,6 +1161,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8067410307417023114, guid: 6e24b814fb8eb4644ad0bedc3ad1f3ba, type: 3}
       propertyPath: fight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067410307417023114, guid: 6e24b814fb8eb4644ad0bedc3ad1f3ba, type: 3}
+      propertyPath: is_boss
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8067410307417023114, guid: 6e24b814fb8eb4644ad0bedc3ad1f3ba, type: 3}
@@ -2082,6 +2087,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 260995642}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 442054768}
   rooms_count: 0
@@ -2357,6 +2363,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 312822543}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 1496332712}
   rooms_count: 0
@@ -2468,6 +2475,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 343104185}
   bonfire: 1
+  is_boss: 0
   paths:
   - {fileID: 1490967588}
   - {fileID: 741422678}
@@ -5199,6 +5207,7 @@ MonoBehaviour:
   hasKey: 1
   room_prefab: {fileID: 731439197}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 1101778251}
   - {fileID: 848839182}
@@ -6144,6 +6153,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 892416357}
   bonfire: 1
+  is_boss: 0
   paths:
   - {fileID: 1401606599}
   - {fileID: 70417046}
@@ -6314,7 +6324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -254431550467665048, guid: 4cbe641eeece9e64ea3bdd09be588c15, type: 3}
       propertyPath: enemyCount
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 410055873816613269, guid: 4cbe641eeece9e64ea3bdd09be588c15, type: 3}
       propertyPath: m_RootOrder
@@ -6582,6 +6592,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 1054076039}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 119371517}
   - {fileID: 1156332938}
@@ -6939,6 +6950,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 1139548446}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 2146076054}
   - {fileID: 484328670}
@@ -7390,6 +7402,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 1381975540}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 1559716432}
   - {fileID: 92893327}
@@ -10177,6 +10190,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 1986140133}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 243399333}
   - {fileID: 457272959}
@@ -10444,6 +10458,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 2053776981}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 1814797240}
   rooms_count: 0
@@ -10555,6 +10570,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 2061524856}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 1782454985}
   - {fileID: 698054095}
@@ -10668,6 +10684,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 2062249968}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 1387514008}
   - {fileID: 1158580578}
@@ -10781,6 +10798,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 2080771309}
   bonfire: 0
+  is_boss: 0
   paths:
   - {fileID: 1687732361}
   - {fileID: 795545913}
@@ -10896,6 +10914,7 @@ MonoBehaviour:
   hasKey: 0
   room_prefab: {fileID: 2117645456}
   bonfire: 1
+  is_boss: 0
   paths:
   - {fileID: 880886019}
   - {fileID: 749494509}
