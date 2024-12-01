@@ -25,7 +25,10 @@ public class EnemyEncounter : MonoBehaviour
 
         public Enemy(int amount, Type type)
         {
-            this.amount = amount;
+            this.amount = (int) ( (float)amount *  SimulationManager.Instance.enemy_amount_multiplier);
+
+            SimulationManager.Instance.enemies_in_run += this.amount;
+
             switch (type)
             {
                 case Type.WEAK:

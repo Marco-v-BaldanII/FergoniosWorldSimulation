@@ -197,14 +197,14 @@ public class Room : MonoBehaviour
         }
 
         // ARRIVED TO BOSS
-        if (is_boss)
+        if (is_boss )
         {
 
-            SimulationManager.Instance.num_simulations--;
+
 
             if (SimulationManager.Instance.num_simulations > 0)
             {
-                SceneManager.LoadScene(0);
+                SimulationManager.Instance.WriteRunSummaryToCSV();
                 return this;
             }
             else

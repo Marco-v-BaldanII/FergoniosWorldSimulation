@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         current_room = spawn_room;
         transform.position = new Vector3(current_room.transform.position.x, current_room.transform.position.y, current_room.transform.position.z - 2);
         hp = maxhp;
+        SimulationManager.Instance.deaths_in_run++;
         if (! firstTime) died = true; firstTime = false;
         Debug.Log("Player respawed");
         canMove = true;
@@ -45,7 +46,15 @@ public class Player : MonoBehaviour
         InitializeCSV();
 
         StartCoroutine("Simulation");
+        maxhp = (int) ( (float) maxhp * SimulationManager.Instance.player_stat_multiplier);
         hp = maxhp;
+
+        attack = (int)((float)attack * SimulationManager.Instance.player_stat_multiplier);
+
+        SimulationManager.Instance.player_starting_hp = hp;
+        SimulationManager.Instance.player_starting_attack = attack;
+        SimulationManager.Instance.player = this;
+
     }
 
     void LevelUp()
@@ -108,6 +117,8 @@ public class Player : MonoBehaviour
         string text = " NOTHING LMAO";
         if (current_room.treasure && current_room.hasTreasure)
         {
+            SimulationManager.Instance.treasures_found++;
+
             switch (current_room.treasure.treasureType)
             {
                 case Treasure.Type.ATK:
@@ -131,6 +142,7 @@ public class Player : MonoBehaviour
             Debug.Log("Player found a treasure which resulted in" + text);
         }
         current_room.hasTreasure = false;
+
     }
 
     void Update()
@@ -147,9 +159,14 @@ public class Player : MonoBehaviour
         CheckTreasure();
         CheckKey();
         canMove = true;
+        if(step > 600)
+        {
+            SimulationManager.Instance.WriteRunSummaryToCSV(false);
+        }
+
     }
 
-    int step = 1;
+    public int step = 1;
 
     private IEnumerator Simulation()
     {

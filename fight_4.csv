@@ -1,20 +1,17 @@
 Turn,PlayerHP,EnemiesRemaining,EnemyCurrentHP,Event
-1,180,10,10,Player took 60 damage
-1,180,9,10,Enemy killed
-1,180,8,10,Enemy killed
-1,180,8,10,Player dealt 20 damage
-2,132,8,10,Player took 48 damage
-2,132,7,10,Enemy killed
-2,132,6,10,Enemy killed
-2,132,6,10,Player dealt 20 damage
-3,96,6,10,Player took 36 damage
-3,96,5,10,Enemy killed
-3,96,4,10,Enemy killed
-3,96,4,10,Player dealt 20 damage
-4,72,4,10,Player took 24 damage
-4,72,3,10,Enemy killed
-4,72,2,10,Enemy killed
-4,72,2,10,Player dealt 20 damage
-5,60,2,10,Player took 12 damage
-5,60,1,10,Enemy killed
-5,60,0,10,Enemy killed
+11,212,5,20,Player took 50 damage
+11,212,5,2,Player dealt 18 damage
+12,162,5,2,Player took 50 damage
+12,162,4,20,Enemy killed
+12,162,4,4,Player dealt 18 damage
+13,122,4,4,Player took 40 damage
+13,122,3,20,Enemy killed
+13,122,3,6,Player dealt 18 damage
+14,92,3,6,Player took 30 damage
+14,92,2,20,Enemy killed
+14,92,2,8,Player dealt 18 damage
+15,72,2,8,Player took 20 damage
+15,72,1,20,Enemy killed
+15,72,1,10,Player dealt 18 damage
+16,62,1,10,Player took 10 damage
+16,62,0,20,Enemy killed
