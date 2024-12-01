@@ -1,2 +1,13 @@
 Turn,PlayerHP,EnemiesRemaining,EnemyCurrentHP,Event
-1,267,0,180,Player took 0 damage
+1,257,1,180,Player took 20 damage
+1,257,1,150,Player dealt 30 damage
+2,237,1,150,Player took 20 damage
+2,237,1,120,Player dealt 30 damage
+3,217,1,120,Player took 20 damage
+3,217,1,90,Player dealt 30 damage
+4,197,1,90,Player took 20 damage
+4,197,1,60,Player dealt 30 damage
+5,177,1,60,Player took 20 damage
+5,177,1,30,Player dealt 30 damage
+6,157,1,30,Player took 20 damage
+6,157,0,180,Enemy killed

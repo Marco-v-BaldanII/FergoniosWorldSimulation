@@ -35,8 +35,8 @@ public class SimulationManager : MonoBehaviour
 
     private void Start()
     {
-        enemy_amount_multiplier = Random.Range(0.2f, 1.5f);
-        player_stat_multiplier = Random.Range(0.5f, 2.0f);
+        enemy_amount_multiplier = Random.Range(0.2f, 1.1f);
+        player_stat_multiplier = Random.Range(0.3f, 2.0f);
         enemies_in_run = 0;
         deaths_in_run = 0;
 
