@@ -54,7 +54,7 @@ public class WeightIcon : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(0.4f);
+            yield return new WaitForSecondsRealtime(0.001f);
             if(label != null && Application.isPlaying) { label.text = (int.Parse(label.text) + weight_increase).ToString(); }
         }
     }
