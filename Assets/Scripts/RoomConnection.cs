@@ -19,8 +19,10 @@ public class RoomConnection : MonoBehaviour
 
     public GameObject weightPref;
 
-    [Range(0, 9)]
-    public int weight;
+    public Weight weight;
+    public WeightIcon weightIcon;
+
+    public bool needs_key = false;
 
     //public RoomConnection(Room rA, Room rB) { Initialize(rA, rB); }
 
@@ -28,13 +30,15 @@ public class RoomConnection : MonoBehaviour
     {
         roomA = rA; roomB = rb;
         lineRenderer = GetComponent<LineRenderer>();
-
+        weightIcon = text_component.GetComponent<WeightIcon>();
         lineRenderer.SetPositions(new Vector3[] { rA.transform.position, rb.transform.position });
-        this.weight = weight;
+        this.weight.max = weight;
 
+        // update weight icon
         this.text_component = text_component;
         label = text_component.GetComponent<TextMeshProUGUI>();
         label.text = weight.ToString();
+
 
     }
 
@@ -42,7 +46,7 @@ public class RoomConnection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        label = GetComponent<TextMeshProUGUI>();   
+
     }
 
     // Update is called once per frame
@@ -57,11 +61,37 @@ public class RoomConnection : MonoBehaviour
             text_component.transform.position = distance * 0.5f;
         }
 
+        if ((roomB && roomB.visited) || (roomA && roomA.visited))
+        {
+            
+            if (weightIcon )
+            {
+                weightIcon.weight_increase = 1;
+
+            }
+        }
+
+       // if(label) label.text = weight.max.ToString();
+
     }
 }
 
-struct Weight
+public struct Weight
 {
-    int min;
-    int max;
+    public int min;
+    public int max;
+
+    // Define equality operator (==)
+    public static bool operator ==(Weight w1, Weight w2)
+    {
+        return w1.min == w2.min && w1.max == w2.max;
+    }
+
+    // Define inequality operator (!=)
+    public static bool operator !=(Weight w1, Weight w2)
+    {
+        return !(w1 == w2);
+    }
+
+
 }

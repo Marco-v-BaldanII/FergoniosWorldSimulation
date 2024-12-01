@@ -1,31 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO; // For file operations
+using System.Linq;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     public Room current_room;
     public Room spawn_room;
-    public float step_time = 0.4f;
+
     int xp = 0;
+
+    public float step_time = 0.001f;
+
     public int maxhp = 200;
     public int hp;
     public int attack = 20;
     bool canMove;
+    public bool has_key = false;
+
+    private string csvPath;
+
+    bool died = false;
+
+    bool firstTime = true;
 
     void Die()
     {
         canMove = false;
         current_room = spawn_room;
+        transform.position = new Vector3(current_room.transform.position.x, current_room.transform.position.y, current_room.transform.position.z - 2);
         hp = maxhp;
+        if (! firstTime) died = true; firstTime = false;
         Debug.Log("Player respawed");
         canMove = true;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Initialize CSV file
+        csvPath = (Application.dataPath + "simulation_data.csv");
+        InitializeCSV();
+
         StartCoroutine("Simulation");
         hp = maxhp;
     }
@@ -65,7 +81,7 @@ public class Player : MonoBehaviour
 
     void CheckBonfire()
     {
-        if(current_room.bonfire)
+        if (current_room.bonfire)
         {
             spawn_room = current_room;
             hp = maxhp;
@@ -73,12 +89,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    void CheckKey()
+    {
+        if (current_room.hasKey)
+        {
+            has_key = true;
+            print("The player found a key");
+        }
+    }
+
     void CheckTreasure()
     {
         string text = " NOTHING LMAO";
-        if(current_room.treasure && current_room.hasTreasure)
+        if (current_room.treasure && current_room.hasTreasure)
         {
-            switch(current_room.treasure.treasureType)
+            switch (current_room.treasure.treasureType)
             {
                 case Treasure.Type.ATK:
                     attack += 5;
@@ -88,49 +113,86 @@ public class Player : MonoBehaviour
                     maxhp += 20;
                     hp += 20;
                     text = " max HP being increased by 20.";
-
                     break;
                 case Treasure.Type.HEAL:
                     hp += maxhp / 2;
-                    if (hp>maxhp)
+                    if (hp > maxhp)
                     {
-                        hp=maxhp;
-
+                        hp = maxhp;
                     }
                     text = " health being restored by 50%.";
                     break;
             }
+            Debug.Log("Player found a treasure which resulted in" + text);
         }
-        Debug.Log("Player found a treasure which resulted in" + text);
         current_room.hasTreasure = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         canMove = false;
+
+        if (hp <= 0)
+        {
+            Die();
+        }
+
         CheckFight();
         CheckBonfire();
         CheckTreasure();
+        CheckKey();
         canMove = true;
     }
 
+    int step = 1;
 
     private IEnumerator Simulation()
     {
-        while(true)
+       
+
+        while (true)
         {
-            // move to room with lowest weight
-            current_room = current_room.GetNextRoom();
+            // Move to the room with the lowest weight
+            if (hp > 0)
+            {
+                current_room = current_room.GetNextRoom(has_key);
+                current_room.visited = true;
+                transform.position = current_room.transform.position;
 
-            transform.position = current_room.transform.position;
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
 
+                // Log data to CSV
+                LogToCSV();
+                step++;
+            }
+            else
+            {
+                Die();
+            }
             yield return new WaitForSecondsRealtime(step_time);
+        }
+    }
 
+    private void InitializeCSV()
+    {
+        // Overwrite the file by recreating it
+        using (StreamWriter writer = new StreamWriter(csvPath, false)) // false ensures the file is overwritten
+        {
+            writer.WriteLine("Step,HP,MaxHP,Attack,HasKey,CurrentRoom,Death");
+        }
+    }
 
+    private void LogToCSV()
+    {
+        using (StreamWriter writer = new StreamWriter(csvPath, true))
+        {
+            writer.WriteLine($"{step},{hp},{maxhp},{attack},{has_key},{current_room.name},{died}");
+            if (died)
+            {
+                died = false;
+            }
 
         }
-
-
     }
+
 }
