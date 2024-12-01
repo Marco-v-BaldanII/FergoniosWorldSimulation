@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     bool firstTime = true;
 
+    public int num_fight = 1;
+
     void Die()
     {
         canMove = false;
@@ -48,10 +50,10 @@ public class Player : MonoBehaviour
 
     void LevelUp()
     {
-        while(xp > 100)
+        while(xp > 30)
         {
-            xp -= 100;
-            attack++;
+            xp -= 30;
+            attack += 5;
             maxhp += 5;
             hp += 5;
             Debug.Log("Leveled up! Attack +1, HP +5");
@@ -75,6 +77,9 @@ public class Player : MonoBehaviour
                 Debug.Log("Obtained " + _xp + " XP.");
                 LevelUp();
             }
+
+            num_fight++;
+
             current_room.fight = false;
         }
     }
@@ -106,12 +111,12 @@ public class Player : MonoBehaviour
             switch (current_room.treasure.treasureType)
             {
                 case Treasure.Type.ATK:
-                    attack += 5;
+                    attack += 10;
                     text = " attack being increased by 5.";
                     break;
                 case Treasure.Type.HP:
-                    maxhp += 20;
-                    hp += 20;
+                    maxhp += 40;
+                    hp += 40;
                     text = " max HP being increased by 20.";
                     break;
                 case Treasure.Type.HEAL:

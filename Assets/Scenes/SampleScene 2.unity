@@ -1035,7 +1035,7 @@ GameObject:
   - component: {fileID: 131219333}
   - component: {fileID: 131219332}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)
+  m_Name: HiddenTreasure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1058,7 +1058,7 @@ MonoBehaviour:
   encounter: {fileID: 525423679}
   fight: 1
   treasure: {fileID: 359000274}
-  hasTreasure: 0
+  hasTreasure: 1
   hasKey: 0
   room_prefab: {fileID: 131219332}
   bonfire: 0
@@ -2055,7 +2055,7 @@ GameObject:
   - component: {fileID: 260995643}
   - component: {fileID: 260995642}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)
+  m_Name: HiddenTreasure2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2078,7 +2078,7 @@ MonoBehaviour:
   encounter: {fileID: 0}
   fight: 0
   treasure: {fileID: 359000274}
-  hasTreasure: 0
+  hasTreasure: 1
   hasKey: 0
   room_prefab: {fileID: 260995642}
   bonfire: 0
@@ -2330,7 +2330,7 @@ GameObject:
   - component: {fileID: 312822544}
   - component: {fileID: 312822543}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: HidenTreasure3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2353,7 +2353,7 @@ MonoBehaviour:
   encounter: {fileID: 0}
   fight: 0
   treasure: {fileID: 607373540}
-  hasTreasure: 0
+  hasTreasure: 1
   hasKey: 0
   room_prefab: {fileID: 312822543}
   bonfire: 0
@@ -2441,7 +2441,7 @@ GameObject:
   - component: {fileID: 343104186}
   - component: {fileID: 343104185}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: EmptyRoom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5800,7 +5800,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1757974498007640307, guid: 6e24b814fb8eb4644ad0bedc3ad1f3ba, type: 3}
       propertyPath: m_Name
-      value: SquareRoom
+      value: Start
       objectReference: {fileID: 0}
     - target: {fileID: 8067410307417023114, guid: 6e24b814fb8eb4644ad0bedc3ad1f3ba, type: 3}
       propertyPath: rooms_count
@@ -6117,7 +6117,7 @@ GameObject:
   - component: {fileID: 892416358}
   - component: {fileID: 892416357}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: SafeRoom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6220,6 +6220,82 @@ Transform:
   m_Father: {fileID: 677671678}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &901310723
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3907911417193615549, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: treasureType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.6989763
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89362717
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.10132889
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462525867291947416, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7678214357222847801, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+      propertyPath: m_Name
+      value: TreasureHP (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+--- !u!114 &901310724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3907911417193615549, guid: 5e2d7ed7ec0ae5041a86eff6ce3fe818, type: 3}
+  m_PrefabInstance: {fileID: 901310723}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38af3bf90b5550045abbd5d0c1cbd5c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1045557018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6479,7 +6555,7 @@ GameObject:
   - component: {fileID: 1054076040}
   - component: {fileID: 1054076039}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)
+  m_Name: EmptyRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6836,7 +6912,7 @@ GameObject:
   - component: {fileID: 1139548447}
   - component: {fileID: 1139548446}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: BattleRoom4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7287,7 +7363,7 @@ GameObject:
   - component: {fileID: 1381975541}
   - component: {fileID: 1381975540}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: BattleRoom3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7308,7 +7384,7 @@ MonoBehaviour:
   connection_prefab: {fileID: 3158519694981977980, guid: 81be954730e3b8746a8ead3a2ed00049, type: 3}
   weightPref: {fileID: 5072994505883857617, guid: b18173273cd81084885bfac39962b566, type: 3}
   encounter: {fileID: 1922378062}
-  fight: 0
+  fight: 1
   treasure: {fileID: 0}
   hasTreasure: 0
   hasKey: 0
@@ -9996,7 +10072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -254431550467665048, guid: 4cbe641eeece9e64ea3bdd09be588c15, type: 3}
       propertyPath: enemyCount
-      value: 25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 410055873816613269, guid: 4cbe641eeece9e64ea3bdd09be588c15, type: 3}
       propertyPath: m_RootOrder
@@ -10074,7 +10150,7 @@ GameObject:
   - component: {fileID: 1986140134}
   - component: {fileID: 1986140133}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: BattleRoom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10341,7 +10417,7 @@ GameObject:
   - component: {fileID: 2053776982}
   - component: {fileID: 2053776981}
   m_Layer: 0
-  m_Name: NO_TU
+  m_Name: HidenTreasure2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10363,8 +10439,8 @@ MonoBehaviour:
   weightPref: {fileID: 5072994505883857617, guid: b18173273cd81084885bfac39962b566, type: 3}
   encounter: {fileID: 0}
   fight: 0
-  treasure: {fileID: 0}
-  hasTreasure: 0
+  treasure: {fileID: 901310724}
+  hasTreasure: 1
   hasKey: 0
   room_prefab: {fileID: 2053776981}
   bonfire: 0
@@ -10452,7 +10528,7 @@ GameObject:
   - component: {fileID: 2061524857}
   - component: {fileID: 2061524856}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)
+  m_Name: SafeRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10565,7 +10641,7 @@ GameObject:
   - component: {fileID: 2062249969}
   - component: {fileID: 2062249968}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
+  m_Name: EmptyRoom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10678,7 +10754,7 @@ GameObject:
   - component: {fileID: 2080771310}
   - component: {fileID: 2080771309}
   m_Layer: 0
-  m_Name: SquareRoom(Clone)(Clone)(Clone)
+  m_Name: BattleRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10698,7 +10774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connection_prefab: {fileID: 3158519694981977980, guid: 81be954730e3b8746a8ead3a2ed00049, type: 3}
   weightPref: {fileID: 5072994505883857617, guid: b18173273cd81084885bfac39962b566, type: 3}
-  encounter: {fileID: 653291609}
+  encounter: {fileID: 1049423098}
   fight: 1
   treasure: {fileID: 0}
   hasTreasure: 0
@@ -11241,6 +11317,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8605981169584169584, guid: 0ea19f8b395f86c469e1681ab70e1acf, type: 3}
+      propertyPath: step_time
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: -8605981169584169584, guid: 0ea19f8b395f86c469e1681ab70e1acf, type: 3}
       propertyPath: spawn_room
       value: 
