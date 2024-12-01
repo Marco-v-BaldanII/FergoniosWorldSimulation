@@ -7,17 +7,18 @@ public class Player : MonoBehaviour
 
     public Room current_room;
     public Room spawn_room;
-    public float step_time = 0.4f;
+    public float step_time = 0.9f;
 
     public int maxhp = 200;
     public int hp;
     public int attack = 20;
     bool canMove;
-
+    public bool has_key = false;
     void Die()
     {
         canMove = false;
         current_room = spawn_room;
+        transform.position = new Vector3(current_room.transform.position.x, current_room.transform.position.y, current_room.transform.position.z - 2);
         hp = maxhp;
         Debug.Log("Player respawed");
         canMove = true;
@@ -46,6 +47,15 @@ public class Player : MonoBehaviour
             spawn_room = current_room;
             hp = maxhp;
             Debug.Log("Player rested at a bonfire and recovered HP");
+        }
+    }
+
+    void CheckKey()
+    {
+        if (current_room.hasKey)
+        {
+            has_key = true;
+            print("The player found a key");
         }
     }
 
@@ -85,13 +95,14 @@ public class Player : MonoBehaviour
     void Update()
     {
         canMove = false;
-        if (hp < 0)
+        if (hp <= 0)
         {
             Die();
         }
         CheckFight();
         CheckBonfire();
         CheckTreasure();
+        CheckKey();
         canMove = true;
     }
 
@@ -101,12 +112,18 @@ public class Player : MonoBehaviour
         while(true)
         {
             // move to room with lowest weight
-            current_room = current_room.GetNextRoom();
+            if (hp > 0)
+            {
+                current_room = current_room.GetNextRoom(has_key);
+                current_room.visited = true;
+                transform.position = current_room.transform.position;
 
-            transform.position = current_room.transform.position;
-
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
-
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+            }
+            else
+            {
+                Die();
+            }
             yield return new WaitForSecondsRealtime(step_time);
 
 

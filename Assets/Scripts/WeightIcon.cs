@@ -17,6 +17,8 @@ public class WeightIcon : MonoBehaviour
     public RoomConnection connection1;
     public RoomConnection connection2;
 
+    public int weight_increase = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +39,14 @@ public class WeightIcon : MonoBehaviour
         if (prev_weight != my_weight)
         {
             prev_weight = my_weight;
-            connection1.weight = my_weight;
-            connection2.weight = my_weight;
+            if(connection1) connection1.weight = my_weight;
+            if (connection2) connection2.weight = my_weight;
         }
 
+        if (weight_increase == 1 && label)
+        {
+            label.color = Color.yellow;
+        }
 
     }
 
@@ -49,7 +55,7 @@ public class WeightIcon : MonoBehaviour
         while (true)
         {
             yield return new WaitForSecondsRealtime(0.4f);
-            if(label != null && Application.isPlaying) { label.text = (int.Parse(label.text) + 1).ToString(); }
+            if(label != null && Application.isPlaying) { label.text = (int.Parse(label.text) + weight_increase).ToString(); }
         }
     }
 }

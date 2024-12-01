@@ -22,6 +22,8 @@ public class RoomConnection : MonoBehaviour
     public Weight weight;
     public WeightIcon weightIcon;
 
+    public bool needs_key = false;
+
     //public RoomConnection(Room rA, Room rB) { Initialize(rA, rB); }
 
     public void Initialize(Room rA, Room rb, int weight, GameObject text_component)
@@ -57,6 +59,16 @@ public class RoomConnection : MonoBehaviour
         {
             var distance = roomA.transform.position + roomB.transform.position;
             text_component.transform.position = distance * 0.5f;
+        }
+
+        if ((roomB && roomB.visited) || (roomA && roomA.visited))
+        {
+            
+            if (weightIcon )
+            {
+                weightIcon.weight_increase = 1;
+
+            }
         }
 
        // if(label) label.text = weight.max.ToString();

@@ -29,16 +29,16 @@ public class EnemyEncounter : MonoBehaviour
             switch (type)
             {
                 case Type.WEAK:
-                    hp = 5;
-                    currentHP = 5;
+                    hp = 5 * 2;
+                    currentHP = 5 * 2;
                     name = "Goblin";
-                    attack = 3;
+                    attack = 3 * 2;
                     break;
                 case Type.STRONG:
-                    hp = 10;
-                    currentHP = 10;
+                    hp = 10 * 2;
+                    currentHP = 10 * 2;
                     name = "Orc";
-                    attack = 5;
+                    attack = 5 * 2;
                     break;
                 case Type.BOSS:
                     hp = 180;

@@ -22,6 +22,8 @@ public class Room : MonoBehaviour
 
     public bool hasTreasure;
 
+    public bool hasKey;
+
     public Room room_prefab;
 
     public bool bonfire;
@@ -41,11 +43,13 @@ public class Room : MonoBehaviour
 
     private Canvas canvas;
 
+    public bool visited = false;
+
     private void Start()
     {
         if (!Application.isPlaying)
         {
-            print("Start ROOOOOM");
+
             rooms_count = 0;
             canvas = GetComponentInParent<Canvas>();
             prev_room_count = 0;
@@ -149,7 +153,7 @@ public class Room : MonoBehaviour
 
     }
 
-    public Room GetNextRoom()
+    public Room GetNextRoom(bool has_key)
     {
         // Create a list to store cumulative weights
         List<float> cumulativeWeights = new List<float>();
@@ -157,6 +161,8 @@ public class Room : MonoBehaviour
 
         for(int i = 0; i < paths.Count; ++i)
         {
+            if (paths[i].needs_key && !has_key) continue;
+
             if (i != 0) { paths[i].weight.min = paths[i - 1].weight.max +1; }
 
             totalWeight += paths[i].weight.max;
@@ -168,6 +174,8 @@ public class Room : MonoBehaviour
 
         for (int i = 0; i < paths.Count; ++i)
         {
+            if (paths[i].needs_key && !has_key) continue;
+
             int prev_max = 0;
             if(i != 0) { prev_max = paths[i].weight.max; }
 
@@ -185,7 +193,7 @@ public class Room : MonoBehaviour
 
         }
 
-        print("Should not come here it's ILLLLEEEEGAAAALLL");
+        //print("Should not come here it's ILLLLEEEEGAAAALLL");
 
             // Fallback (shouldn't reach here if weights are correctly calculated)
         int j = 0;
